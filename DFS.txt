@@ -1,0 +1,25 @@
+int* DFS(int**& G, int n, int s)
+{
+	int* tr = new int[n];
+	int* visited = new int[n];
+	memset(tr, -1, sizeof(int) * n);
+	memset(visited, -1, sizeof(int) * n);
+
+	tr[0] = s;
+	visited[s] = 1;
+
+	int j = s, k = 1, i;
+flag:
+	for (i = 0; i < n; ++i)
+	{
+		if (G[j][i] == 1 && visited[i] == -1)
+		{
+			tr[k] = i;
+			++k;
+			visited[i] = 1;
+			j = i;
+			goto flag;
+		}
+	}
+	return tr;
+}

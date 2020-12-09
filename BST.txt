@@ -1,0 +1,27 @@
+class node
+{
+public:
+	int val;
+	node* lc;
+	node* rc;
+	node() { val = 0;  lc = NULL; rc = NULL; }
+};
+//int h;//深度
+void insert(node*& p, int num)
+{
+	//h++;
+	if (p == NULL)
+	{
+		p = new node;
+		p->val = num;
+		return;
+	}
+	else if (num < p->val)
+	{
+		insert(p->lc, num);
+	}
+	else if (num >= p->val)
+	{
+		insert(p->rc, num);
+	}
+}

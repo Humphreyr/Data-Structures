@@ -1,0 +1,29 @@
+struct ListNode
+{
+	int data;
+	ListNode* next;
+};
+
+ListNode* Create(ListNode* &head)
+{
+	ListNode* s = NULL, * p = NULL;
+	s = new ListNode;
+	cin >> s->data;
+	while (s->data != -1)
+	{
+		if (head == NULL)
+		{
+			head = s;
+		}
+		else
+		{
+			p->next = s;
+		}
+		p = s;
+		s = new ListNode;
+		cin >> s->data;
+	}
+	p->next = NULL;
+	delete s;
+	return head;
+}

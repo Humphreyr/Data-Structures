@@ -1,0 +1,32 @@
+int* BFS(int**& G, int n, int s)
+{
+	int* tr = new int[n];
+	int* visited = new int[n];
+	memset(tr, -1, sizeof(int) * n);
+	memset(visited, -1, sizeof(int) * n);
+
+	visited[s] = 1;
+
+	int i, k = 0;
+	queue<int>q;
+	q.push(s);
+flag:
+	{
+		if (!q.empty())
+		{
+			for (i = 0; i < n; ++i)
+			{
+				if (G[q.front()][i] == 1 && visited[i] == -1)
+				{
+					q.push(i);
+					visited[i] = 1;
+				}
+			}
+			tr[k] = q.front();
+			++k;
+			q.pop();
+			goto flag;
+		}
+	}
+	return tr;
+}

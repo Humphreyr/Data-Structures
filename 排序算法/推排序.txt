@@ -1,0 +1,12 @@
+	//堆排序
+	int* minheap = new int[n];
+	//min = MIN(heap, n);
+	int m = n;
+	while (m)
+	{
+		minheap[m - 1] = heap[0];
+		swap(heap[0], heap[m - 1]);
+		siftdown(heap, m - 1, 0);
+		--m;
+	}
+//函数见小顶堆.txt

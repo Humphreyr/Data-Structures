@@ -1,0 +1,10 @@
+void CHT(int* a, int n, int num, int temp)//a是目标数组，n是数组长度，num是目标数
+{
+	int val = num % n;
+	if (a[val] == -1)
+	{
+		a[val] = temp;
+		return;
+	}
+	if (a[val] != -1)CHT(a, n, num + 1, temp);
+}

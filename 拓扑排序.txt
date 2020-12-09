@@ -1,0 +1,42 @@
+int* topo_sort(int** G,int N)
+{
+	int i, j, k = 0;
+	queue<int>q;
+	//每个节点的入度数组
+	int* indegree = new int[N];
+	memset(indegree, 0, sizeof(int) * N);
+
+	for (j = 0; j < N; ++j)
+		for (i = 0; i < N; ++i)
+			if (G[i][j] == 1)
+				++indegree[j];
+
+	int* sort = new int[N];
+	memset(sort, 0, sizeof(int) * N);
+	int* flag = new int[N];
+	memset(flag, -1, sizeof(int) * N);
+
+label:
+	{
+		for (i = 0; i < N; ++i)
+		{
+			if (indegree[i] == 0 && flag[i] == -1)
+			{
+				q.push(i);
+				flag[i] = 1;
+			}
+		}
+
+		if (!q.empty())
+		{
+			for (j = 0; j < N; ++j)
+				if (G[q.front()][j] == 1)
+					--indegree[j];
+			sort[k] = q.front();
+			++k;
+			q.pop();
+			goto label;
+		}
+	}
+	return sort;
+}

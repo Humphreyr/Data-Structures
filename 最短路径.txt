@@ -1,0 +1,68 @@
+#include<iostream>
+#include<string.h>
+using namespace std;
+
+//int* SP(int* fin, int first)
+//{
+//	return fin;
+//}
+int main()
+{
+	int i, j;
+	int N, C, S, T;
+	cin >> N >> C >> S >> T;
+
+	//题目顶点范围是1到N，为了方便数组操作，直接减1，不影响输出结果
+	--S;
+	--T;
+
+	//初始化图
+	int** G = new int* [N];
+	for (i = 0; i < N; ++i)
+		G[i] = new int[N];
+	for (i = 0; i < N; ++i)
+		memset(G[i], -1, sizeof(int) * N);
+
+	int vi, vj, w;
+	for (i = 1; i <= C; ++i)
+	{
+		cin >> vi >> vj >> w;
+		if (w < G[vi - 1][vj - 1] || G[vi - 1][vj - 1] == -1)
+			G[vi - 1][vj - 1] = w;
+	}
+
+	int* path = new int[N];
+	memset(path, 0x1f, sizeof(int) * N);
+	int* flag = new int[N];
+	memset(flag, 0, sizeof(int) * N);
+
+	path[S] = 0;
+	flag[S] = 1;
+	int index, min, num = 0;
+	index = S;
+label:
+	{
+		for (j = 0; j < N; ++j)
+			if (G[index][j] > 0 && flag[j] == 0)
+			{
+				if (path[index] + G[index][j] < path[j])
+					path[j] = path[index] + G[index][j];
+				else
+					path[j] = G[index][j];
+			}
+		min = 0x1f1f1f1f;
+		for (i = 0; i < N; ++i)
+			if (path[i] < min && flag[i] == 0)
+				min = i;
+		if (min != 0x1f1f1f1f)
+		{
+			index = min;
+			flag[index] = 1;
+		}
+		for (i = 0; i < N; ++i)
+			if (flag[i] == 1)
+				++num;
+		if (num < N)goto label;
+	}
+	cout << path[T] << endl;
+}

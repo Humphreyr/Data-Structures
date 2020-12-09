@@ -1,0 +1,11 @@
+	string str;
+	getline(cin, str);
+	istringstream ss(str);
+	int n = 0;
+	int heap[100] = { 0 };
+	do
+	{
+		ss >> heap[n];
+		++n;
+	} while (ss);
+	--n;
